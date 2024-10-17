@@ -11,17 +11,16 @@ const RecipeGenerator = () => {
     const handleSearch = async () => {
         const ingredientArray = ingredients.split(',').map(ingredient => ingredient.trim());
         try {
-            // Fetch all recipes from the server
             const response = await fetch('http://localhost:3000/recipes');
             if (response.ok) {
                 const data = await response.json();
                 const matchedRecipe = findBestRecipe(data, ingredientArray);
                 if (matchedRecipe) {
                     setRecipe(matchedRecipe);
-                    setError(null); // Reset any previous error
+                    setError(null);
                 } else {
                     setError('No recipe found with the provided ingredients');
-                    setRecipe(null); // Reset recipe if error occurs
+                    setRecipe(null);
                 }
             } else {
                 setError('Failed to fetch recipes');

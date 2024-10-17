@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import CustomImage from './CustomImage'; // Import your CustomImage component
+import CustomImage from './CustomImage';
 
 const RecipeCard = ({ recipe }) => {
     return (
@@ -12,7 +12,7 @@ const RecipeCard = ({ recipe }) => {
             />
             <div className="recipe-card-info">
                 <p className="recipe-title">{recipe.name}</p>
-                <p className="recipe-cuisine">Cuisine: {recipe.cuisine || 'Unknown'}</p> {/* Display Cuisine */}
+                <p className="recipe-cuisine">Cuisine: {recipe.cuisine || 'Unknown'}</p> {}
                 <p className="recipe-desc">{recipe.description || 'No description available.'}</p>
                 <Link to={`/recipes/${recipe._id}`} className="view-btn">VIEW RECIPE</Link>
             </div>
@@ -26,7 +26,7 @@ RecipeCard.propTypes = {
         name: PropTypes.string.isRequired,
         mainImage: PropTypes.string,
         description: PropTypes.string,
-        cuisine: PropTypes.string, // Add cuisine prop type
+        cuisine: PropTypes.string,
     }).isRequired,
 };
 

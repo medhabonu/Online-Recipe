@@ -8,11 +8,10 @@
     .recipe-card-info {
         padding: 15px;
 
-        // Added styles for cuisine display
         .recipe-cuisine {
-            color: var(--text-light); // Use the same color as the recipe description
-            font-size: 0.9em; // Match the font size with the description
-            margin: 0.5em 0; // Add some margin for spacing
+            color: var(--text-light);
+            font-size: 0.9em;
+            margin: 0.5em 0;
         }
     }
 

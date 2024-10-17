@@ -4,7 +4,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const SearchComponent = ({ onResults, onNewSearch }) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [activeTab, setActiveTab] = useState('name'); // 'name' or 'ingredient'
+    const [activeTab, setActiveTab] = useState('name');
     const [difficulty, setDifficulty] = useState('');
 
     const handleInputChange = (e) => setSearchTerm(e.target.value);
@@ -16,8 +16,8 @@ const SearchComponent = ({ onResults, onNewSearch }) => {
         await searchRecipes(queryType, searchTerm, difficulty);
 
         if (searchTerm || difficulty) {
-            const formattedSearch = `${activeTab}: ${searchTerm}`; // Format as "name: [search term]" or "ingredient: [search term]"
-            onNewSearch(formattedSearch); // Update previous searches
+            const formattedSearch = `${activeTab}: ${searchTerm}`;
+            onNewSearch(formattedSearch);
         }
     };
 

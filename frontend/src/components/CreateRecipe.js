@@ -9,10 +9,10 @@ export default function CreateRecipe() {
         preparationLevel: '',
         steps: [''],
         description: '',
-        cuisine: '', // Added Cuisine state
+        cuisine: '',
     });
     const [imagePreview, setImagePreview] = useState('');
-    const [successMessage, setSuccessMessage] = useState(''); // State for success message
+    const [successMessage, setSuccessMessage] = useState('');
 
     const toggleModal = () => {
         setIsOpen(!isOpen);
@@ -27,10 +27,10 @@ export default function CreateRecipe() {
             preparationLevel: '',
             steps: [''],
             description: '',
-            cuisine: '', // Reset Cuisine
+            cuisine: '',
         });
         setImagePreview('');
-        setSuccessMessage(''); // Reset success message
+        setSuccessMessage('');
     };
 
     const handleInputChange = (e) => {
@@ -76,7 +76,6 @@ export default function CreateRecipe() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validate description length
         if (recipe.description.length > 60) {
             alert("Description must be 60 characters or less.");
             return;
@@ -88,7 +87,7 @@ export default function CreateRecipe() {
         formData.append('ingredients', recipe.ingredients);
         formData.append('preparationLevel', recipe.preparationLevel);
         formData.append('description', recipe.description);
-        formData.append('cuisine', recipe.cuisine); // Include Cuisine in form data
+        formData.append('cuisine', recipe.cuisine);
         recipe.steps.forEach((step, index) => {
             formData.append(`steps[${index}]`, step);
         });
@@ -101,8 +100,8 @@ export default function CreateRecipe() {
             if (response.ok) {
                 const newRecipe = await response.json();
                 console.log('Recipe Created:', newRecipe);
-                setSuccessMessage("You have successfully added a recipe!"); // Set success message
-                resetForm(); // Clear the form
+                setSuccessMessage("You have successfully added a recipe!");
+                resetForm();
             } else {
                 console.error('Failed to create recipe:', response.statusText);
             }
@@ -189,7 +188,7 @@ export default function CreateRecipe() {
                             <button type="button" className="add-step-btn" onClick={addStep}>Add Step</button>
                             <button type="submit" className="btn add-recipe-btn">Add Recipe</button>
                         </form>
-                        {successMessage && <p className="success-message">{successMessage}</p>} {/* Display success message */}
+                        {successMessage && <p className="success-message">{successMessage}</p>} {}
                     </div>
                 </div>
             )}

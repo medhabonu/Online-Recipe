@@ -54,7 +54,7 @@ export default function Recipes() {
                 <h2 className="section-title">Create Your Own Recipe</h2>
                 <p className="section-description">Share your culinary creations with the world!</p>
                 <CreateRecipe />
-                <hr /> {/* Horizontal line after the Create Recipe section */}
+                <hr /> {}
             </div>
             <div className="search-section">
                 <PreviousSearches 
@@ -70,7 +70,7 @@ export default function Recipes() {
                     onResults={handleSearchResults} 
                     onNewSearch={updatePreviousSearches} 
                 />
-                <hr /> {/* Horizontal line after Search for Recipes section */}
+                <hr /> {}
             </div>
             <div className="recipes-container">
                 {loading ? (

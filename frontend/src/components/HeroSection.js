@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 import CustomImage from "./CustomImage";
 
 export default function HeroSection() {
@@ -21,7 +21,7 @@ export default function HeroSection() {
                 <p className="info">
                     This is a place where one can find all kinds of recipes.
                 </p>
-                {/* Wrap the button with Link to make it navigate */}
+                {}
                 <Link to="/cuisines">
                     <button className="btn">Explore now</button>
                 </Link>

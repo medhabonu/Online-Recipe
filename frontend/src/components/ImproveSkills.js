@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import CreateRecipe from '../components/CreateRecipe'; // Import the CreateRecipe component
+import CreateRecipe from '../components/CreateRecipe';
 
 export default function ImproveSkills() {
-    const [isOpen, setIsOpen] = useState(false); // State to control modal visibility
+    const [isOpen, setIsOpen] = useState(false);
     const list = [
         "Learn New Recipes",
         "Experiment with Food",
@@ -24,7 +24,7 @@ export default function ImproveSkills() {
                 {list.map((item, index) => (
                     <p className="skill-item" key={index}>{item}</p>
                 ))}
-                {<CreateRecipe />} {/* Render CreateRecipe modal when isOpen is true */}
+                {<CreateRecipe />}
             </div>
         </div>
     );

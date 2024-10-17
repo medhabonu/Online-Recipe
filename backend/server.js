@@ -8,7 +8,6 @@ const app = express();
 const port = 3000;
 const uri = "mongodb+srv://medhanaidubonu:fxJZ3r4sFt5krCFY@recipes.9ye98.mongodb.net/?retryWrites=true&w=majority&appName=Recipes";
 
-// Middleware setup
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('uploads'));
@@ -17,7 +16,6 @@ const upload = multer({ dest: 'uploads/' });
 
 let db;
 
-// Connect to MongoDB
 MongoClient.connect(uri)
     .then(client => {
         db = client.db('recipeBook');
@@ -27,37 +25,33 @@ MongoClient.connect(uri)
     })
     .catch(error => {
         console.error('Database connection error:', error);
-        process.exit(1); // Exit the process if database connection fails
+        process.exit(1);
     });
 
-// Get all recipes or search by name, ingredient, or difficulty
 app.get('/recipes', async (req, res) => {
-    res.set('Cache-Control', 'no-store'); // Prevent caching
+    res.set('Cache-Control', 'no-store');
     const { search, ingredient, difficulty } = req.query;
 
-    console.log("Received Query Params:", req.query); // Log query parameters for debugging
+    console.log("Received Query Params:", req.query);
 
     try {
         let filter = {};
 
-        // Search by name
         if (search) {
-            filter.name = { $regex: new RegExp(search.trim(), 'i') }; // Case-insensitive
+            filter.name = { $regex: new RegExp(search.trim(), 'i') };
         }
 
-        // Search by ingredient (handling hashtags)
         if (ingredient) {
-            const cleanedIngredient = ingredient.startsWith('#') ? ingredient.slice(1) : ingredient; // Remove '#' if present
-            filter.ingredients = { $regex: new RegExp(cleanedIngredient.trim(), 'i') }; // Case-insensitive
+            const cleanedIngredient = ingredient.startsWith('#') ? ingredient.slice(1) : ingredient;
+            filter.ingredients = { $regex: new RegExp(cleanedIngredient.trim(), 'i') };
         }
 
-        // Filter by difficulty
         if (difficulty) {
-            filter.preparationLevel = difficulty; // Exact match
+            filter.preparationLevel = difficulty;
         }
 
         const recipes = await db.collection('recipes').find(filter).toArray();
-        console.log("Found Recipes:", recipes); // Log the found recipes for debugging
+        console.log("Found Recipes:", recipes);
 
         res.json(recipes);
     } catch (error) {
@@ -66,7 +60,6 @@ app.get('/recipes', async (req, res) => {
     }
 });
 
-// Get a specific recipe by ID
 app.get('/recipes/:id', async (req, res) => {
     try {
         const recipeId = req.params.id;
@@ -84,7 +77,6 @@ app.get('/recipes/:id', async (req, res) => {
     }
 });
 
-// Create a new recipe
 app.post('/recipes', upload.single('mainImage'), async (req, res) => {
     try {
         const newRecipe = {
@@ -94,7 +86,7 @@ app.post('/recipes', upload.single('mainImage'), async (req, res) => {
             preparationLevel: req.body.preparationLevel,
             steps: req.body.steps,
             description: req.body.description,
-            cuisine: req.body.cuisine, // Include Cuisine
+            cuisine: req.body.cuisine,
         };
         const result = await db.collection('recipes').insertOne(newRecipe);
         res.status(201).json({ id: result.insertedId, ...newRecipe });
@@ -104,7 +96,6 @@ app.post('/recipes', upload.single('mainImage'), async (req, res) => {
     }
 });
 
-// Update a recipe by ID
 app.put('/recipes/:id', async (req, res) => {
     try {
         const recipeId = req.params.id;
@@ -127,7 +118,6 @@ app.put('/recipes/:id', async (req, res) => {
     }
 });
 
-// Delete a recipe by ID
 app.delete('/recipes/:id', async (req, res) => {
     try {
         const recipeId = req.params.id;

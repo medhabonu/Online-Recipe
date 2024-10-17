@@ -23,7 +23,7 @@ export default function Navbar() {
             icon: faList
         },
         {
-            name: "Recipe Generator", // New link
+            name: "Recipe Generator",
             path: "/recipe-generator",
             icon: faMagic
         }

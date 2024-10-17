@@ -49,7 +49,7 @@ export default function Cuisines() {
                 <div key={cuisine} className="cuisine-category">
                     <h2>{cuisine}</h2>
                     <p className="cuisine-description">
-                        {/* Add a description for each cuisine. You might want to customize this further */}
+                        {}
                         Discover the wonderful dishes and ingredients that define {cuisine} cuisine.
                     </p>
                     <div className="recipe-cards">
@@ -57,7 +57,7 @@ export default function Cuisines() {
                             <RecipeCard key={recipe._id} recipe={recipe} />
                         ))}
                     </div>
-                    {/* Add a horizontal line after each cuisine category, except the last one */}
+                    {}
                     {index < cuisines.length - 1 && <hr />}
                 </div>
             ))}
